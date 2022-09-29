@@ -15,8 +15,11 @@ import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.teamupboard.R;
+import com.example.teamupboard.adapter.CardMasterAdapter;
 import com.example.teamupboard.databinding.FragmentHomeBinding;
 
 
@@ -26,14 +29,14 @@ public class HomeFragment extends Fragment {
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        HomeViewModel homeViewModel =
-                new ViewModelProvider(this).get(HomeViewModel.class);
 
         binding = FragmentHomeBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
+
         return root;
     }
+
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
@@ -46,7 +49,17 @@ public class HomeFragment extends Fragment {
 
         NavigationUI.setupWithNavController(
                 toolbar,navController,appBarConfiguration
+
         );
+
+        //卡片
+        RecyclerView recyclerView = view.findViewById(R.id.card_master_list);
+        String[] data = {"ashkghfuaaghjkhfaishgauighlaghg","ioahoighhagghlahgulhadguagn","haogafgadgdfggiyhoha"};
+        CardMasterAdapter cardMasterAdapter = new CardMasterAdapter(data);
+        recyclerView.setAdapter(cardMasterAdapter);
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(this.getContext(),2);
+        gridLayoutManager.setOrientation(GridLayoutManager.HORIZONTAL);
+        recyclerView.setLayoutManager(gridLayoutManager);
     }
 
     @Override

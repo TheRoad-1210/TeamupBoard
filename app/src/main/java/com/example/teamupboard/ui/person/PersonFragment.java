@@ -16,7 +16,6 @@ import com.example.teamupboard.databinding.FragmentPersonBinding;
 public class PersonFragment extends Fragment {
 
     private FragmentPersonBinding binding;
-    test;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {

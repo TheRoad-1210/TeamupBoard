@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">TeamupBoard</string>
+    <string name="title_home">广场</string>
+    <string name="title_trend">趋势</string>
+    <string name="title_person">我的</string>
+    <string name="home_tabs_local">本地</string>
+    <string name="home_tabs_online">线上</string>
+</resources>

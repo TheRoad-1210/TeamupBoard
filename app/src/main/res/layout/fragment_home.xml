@@ -3,55 +3,61 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="112dp"
-    tools:context=".ui.home.HomeFragment">
+    android:layout_height="match_parent"
+    tools:context=".ui.home.HomeFragment"
+    tools:ignore="ExtraText">
 
-    <com.google.android.material.appbar.AppBarLayout
-        android:id="@+id/appBarLayout"
-        android:layout_width="0dp"
-        android:layout_height="104dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="MissingConstraints">
+<!--    <com.google.android.material.appbar.AppBarLayout-->
+<!--        android:id="@+id/appBarLayout"-->
+<!--        android:layout_width="0dp"-->
+<!--        android:layout_height="104dp"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="parent"-->
+<!--        tools:ignore="MissingConstraints">-->
 
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbar_home"
-            android:layout_width="match_parent"
-            android:layout_height="?android:attr/windowTitleSize" />
-
-        <com.google.android.material.tabs.TabLayout
-            android:id="@+id/tab_home"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_constraintTop_toTopOf="@id/toolbar_home"
-            >
-            <com.google.android.material.tabs.TabItem
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:text="@string/home_tabs_local"/>
-
-            <com.google.android.material.tabs.TabItem
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:text="@string/home_tabs_online"/>
-        </com.google.android.material.tabs.TabLayout>
+<!--        <androidx.appcompat.widget.Toolbar-->
+<!--            android:id="@+id/toolbar_home"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="?android:attr/windowTitleSize"-->
+<!--            android:background="#3F51B5" />-->
 
 
-    </com.google.android.material.appbar.AppBarLayout>
+<!--        <com.google.android.material.tabs.TabLayout-->
+<!--            android:id="@+id/tab_home"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            app:layout_constraintTop_toTopOf="@id/toolbar_home"-->
+<!--            >-->
+<!--            <com.google.android.material.tabs.TabItem-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="match_parent"-->
+<!--                android:text="@string/home_tabs_local"/>-->
+
+<!--            <com.google.android.material.tabs.TabItem-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="match_parent"-->
+<!--                android:text="@string/home_tabs_online"/>-->
+<!--        </com.google.android.material.tabs.TabLayout>-->
+
+
+<!--    </com.google.android.material.appbar.AppBarLayout>-->
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/card_master_list"
         android:layout_width="0dp"
-        android:layout_height="550dp"
+        android:layout_height="0dp"
         android:layout_marginStart="1dp"
-        android:background="#873D3D"
-        android:backgroundTint="#B81414"
+        android:layout_marginEnd="5dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.384">
 
 
     </androidx.recyclerview.widget.RecyclerView>
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

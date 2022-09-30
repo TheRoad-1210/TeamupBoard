@@ -1,5 +1,6 @@
 package com.example.teamupboard.ui.home;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,51 +21,70 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.teamupboard.R;
 import com.example.teamupboard.adapter.CardMasterAdapter;
-import com.example.teamupboard.databinding.FragmentHomeBinding;
 
 
 public class HomeFragment extends Fragment {
+    private View view;
+    private RecyclerView recyclerView;
+    private CardMasterAdapter cardMasterAdapter;
 
-    private FragmentHomeBinding binding;
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setHasOptionsMenu(true);
+    }
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
 
-        binding = FragmentHomeBinding.inflate(inflater, container, false);
-        View root = binding.getRoot();
+        view = inflater.inflate(R.layout.fragment_home,container,false);
+        initRecyclerView();
+        return view;
 
-
-        return root;
     }
 
+    /**
+     * 对RecyclerView进行配置
+     */
+    @SuppressLint("NotifyDataSetChanged")
+    private void initRecyclerView(){
+        recyclerView = view.findViewById(R.id.card_master_list);
+        String[] data = {"1","1","hao","2","o","o"};
 
-    @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-
-        //顶部应用栏+标签
-        NavController navController = Navigation.findNavController(view);
-        AppBarConfiguration appBarConfiguration =
-                new AppBarConfiguration.Builder(R.id.navigation_home).build();
-        Toolbar toolbar = view.findViewById(R.id.toolbar_home);
-
-        NavigationUI.setupWithNavController(
-                toolbar,navController,appBarConfiguration
-
-        );
-
-        //卡片
-        RecyclerView recyclerView = view.findViewById(R.id.card_master_list);
-        String[] data = {"ashkghfuaaghjkhfaishgauighlaghg","ioahoighhagghlahgulhadguagn","haogafgadgdfggiyhoha"};
-        CardMasterAdapter cardMasterAdapter = new CardMasterAdapter(data);
+        cardMasterAdapter = new CardMasterAdapter(this.getActivity(),data);
         recyclerView.setAdapter(cardMasterAdapter);
-        GridLayoutManager gridLayoutManager = new GridLayoutManager(this.getContext(),2);
-        gridLayoutManager.setOrientation(GridLayoutManager.HORIZONTAL);
+
+
+//        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity(),LinearLayoutManager.VERTICAL,false));
+
+        System.out.println(cardMasterAdapter.getItemCount());
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(this.getActivity(),2);
+        gridLayoutManager.setOrientation(GridLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(gridLayoutManager);
+        cardMasterAdapter.notifyDataSetChanged();
+
+//        cardMasterAdapter.
     }
+
+//    @Override
+//    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+//
+//        //顶部应用栏+标签
+//        NavController navController = Navigation.findNavController(view);
+//        AppBarConfiguration appBarConfiguration =
+//                new AppBarConfiguration.Builder(R.id.navigation_home).build();
+//        Toolbar toolbar = view.findViewById(R.id.toolbar_home);
+//
+//        NavigationUI.setupWithNavController(
+//                toolbar,navController,appBarConfiguration
+//
+//        );
+//
+//
+//    }
 
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        binding = null;
     }
 }

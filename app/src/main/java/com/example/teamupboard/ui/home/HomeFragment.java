@@ -1,8 +1,11 @@
 package com.example.teamupboard.ui.home;
 
 import android.annotation.SuppressLint;
+import android.app.SearchManager;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -63,10 +66,14 @@ public class HomeFragment extends Fragment {
         recyclerView.setLayoutManager(gridLayoutManager);
         cardMasterAdapter.notifyDataSetChanged();
 
-//        cardMasterAdapter.
     }
 
-//    @Override
+    @Override
+    public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
+        inflater.inflate(R.menu.top_home_menu,menu);
+    }
+
+    //    @Override
 //    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
 //
 //        //顶部应用栏+标签

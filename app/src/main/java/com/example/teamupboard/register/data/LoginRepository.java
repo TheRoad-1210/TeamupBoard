@@ -1,6 +1,7 @@
 package com.example.teamupboard.register.data;
 
 import com.example.teamupboard.register.data.model.LoggedInUser;
+import com.example.teamupboard.register.data.model.User;
 
 /**
  * Class that requests authentication and user information from the remote data source and
@@ -43,9 +44,9 @@ public class LoginRepository {
         // @see https://developer.android.com/training/articles/keystore
     }
 
-    public Result<LoggedInUser> login(String username, String password) {
+    public Result<User> login(String username, String password) {
         // handle login
-        Result<LoggedInUser> result = dataSource.login(username, password);
+        Result<User> result = dataSource.login(username, password);
         if (result instanceof Result.Success) {
             setLoggedInUser(((Result.Success<LoggedInUser>) result).getData());
         }

@@ -29,7 +29,7 @@ public class CardMasterAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
 
         public MasterViewHolder(@NonNull View itemView) {
             super(itemView);
-            textView = itemView.findViewById(R.id.card_master_test);
+            textView = itemView.findViewById(R.id.card_master_text);
             cardView = itemView.findViewById(R.id.card_master);
             //设置点击事件
             itemView.setOnClickListener(new View.OnClickListener() {

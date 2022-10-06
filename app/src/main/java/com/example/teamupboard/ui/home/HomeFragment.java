@@ -44,21 +44,19 @@ public class HomeFragment extends Fragment {
 //    private RecyclerView recyclerView;
 //    private CardMasterAdapter cardMasterAdapter;
 //    private ArrayList<TeamupBoard> boards = new ArrayList<>();
-    private List<CardFragment> cardFragmentList = new ArrayList<>();
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-        initTabLayout();
         setHasOptionsMenu(true);
     }
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-
         view = inflater.inflate(R.layout.fragment_home,container,false);
 //        initRecyclerView();
+        initTabLayout();
         return view;
 
     }
@@ -94,14 +92,14 @@ public class HomeFragment extends Fragment {
 //    }
 
     private void initTabLayout(){
+        List<CardFragment> cardFragmentList = new ArrayList<>();
         TabLayout tabLayout = view.findViewById(R.id.home_tab);
         ViewPager viewPager = view.findViewById(R.id.home_view);
-        tabLayout.addTab(tabLayout.newTab().setText(R.string.home_tabs_local));
+        tabLayout.addTab(tabLayout.newTab().setText("本地"));
         cardFragmentList.add(CardFragment.newInstance("本地"));
         tabLayout.addTab(tabLayout.newTab().setText(R.string.home_tabs_online));
         cardFragmentList.add(CardFragment.newInstance("线上"));
-
-        viewPager.setAdapter(new FragmentPagerAdapter(getActivity().getSupportFragmentManager(),FragmentPagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
+        FragmentPagerAdapter fragmentPagerAdapter = new FragmentPagerAdapter(getActivity().getSupportFragmentManager(),FragmentPagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
             @NonNull
             @Override
             public Fragment getItem(int position) {
@@ -112,7 +110,10 @@ public class HomeFragment extends Fragment {
             public int getCount() {
                 return cardFragmentList.size();
             }
-        });
+
+        };
+        viewPager.setAdapter(fragmentPagerAdapter);
+        fragmentPagerAdapter.notifyDataSetChanged();
 
         tabLayout.setupWithViewPager(viewPager,false);
     }

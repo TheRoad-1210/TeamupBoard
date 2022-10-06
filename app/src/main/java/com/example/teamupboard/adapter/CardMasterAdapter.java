@@ -10,6 +10,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.DrawableUtils;
 import androidx.cardview.widget.CardView;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.teamupboard.R;
@@ -34,6 +35,7 @@ public class CardMasterAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
         private final CardView cardView;
         private final TextView title;
         private final RoundImageView picture;
+        private final RecyclerView recyclerView;
 
         public MasterViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -41,6 +43,7 @@ public class CardMasterAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
             cardView = itemView.findViewById(R.id.card_master);
             title = itemView.findViewById(R.id.card_master_title);
             picture = itemView.findViewById(R.id.card_master_image);
+            recyclerView = itemView.findViewById(R.id.card_master_type_list);
 
             //设置点击事件
             itemView.setOnClickListener(new View.OnClickListener() {
@@ -66,6 +69,10 @@ public class CardMasterAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
         public RoundImageView getPicture() {
             return picture;
         }
+
+        public RecyclerView getRecyclerView() {
+            return recyclerView;
+        }
     }
 
     @NonNull
@@ -83,6 +90,12 @@ public class CardMasterAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
         ((MasterViewHolder) holder).getTextView().setText(data.get(position).getTbDetail());
         ((MasterViewHolder) holder).getTitle().setText(data.get(position).getTbTitle());
         ((MasterViewHolder) holder).getPicture().setImageBitmap(data.get(position).getTbMasterPicture());
+        CardMasterTypeAdapter cardMasterTypeAdapter = new CardMasterTypeAdapter(context, data.get(position).getTbType());
+        ((MasterViewHolder) holder).getRecyclerView().setAdapter(cardMasterTypeAdapter);
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(context,1);
+        gridLayoutManager.setOrientation(GridLayoutManager.HORIZONTAL);
+        ((MasterViewHolder) holder).getRecyclerView().setLayoutManager(gridLayoutManager);
+//        cardMasterTypeAdapter.notifyDataSetChanged();
     }
 
 

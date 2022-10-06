@@ -61,6 +61,7 @@ public class HomeFragment extends Fragment {
     @SuppressLint("NotifyDataSetChanged")
     private void initRecyclerView(){
         recyclerView = view.findViewById(R.id.card_master_list);
+        String[] strings = {"食物","美食","测试"};
 
         for (int i = 0; i < 10; i++) {
             TeamupBoard teamupBoard = new TeamupBoard(
@@ -69,6 +70,7 @@ public class HomeFragment extends Fragment {
                     "甜食是人类最简单最初始的美食体验，蜂蜜的主要成分是果糖和葡萄糖，作为早期人类唯一的甜食，蜂蜜能快速产生热量，补充体力" +
                             "这对我们的祖先至关重要，和人工提炼的蔗糖不同，蜂蜜中的糖，不经过水解，就可以直接被人体吸收。在中国的厨房，无论制作菜肴还是甜点，" +
                             "蜂蜜都是其他糖类无法替代的。当然，白马甲最喜欢的是酥油蜂蜜。\n",
+                    strings,
                     BitmapFactory.decodeResource(getResources(),R.drawable.cat)
             );
             boards.add(teamupBoard);
@@ -76,10 +78,6 @@ public class HomeFragment extends Fragment {
         cardMasterAdapter = new CardMasterAdapter(this.getActivity(),boards);
         recyclerView.setAdapter(cardMasterAdapter);
 
-
-//        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity(),LinearLayoutManager.VERTICAL,false));
-
-        System.out.println(cardMasterAdapter.getItemCount());
         GridLayoutManager gridLayoutManager = new GridLayoutManager(this.getActivity(),2);
         gridLayoutManager.setOrientation(GridLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(gridLayoutManager);
@@ -92,22 +90,7 @@ public class HomeFragment extends Fragment {
         inflater.inflate(R.menu.top_home_menu,menu);
     }
 
-    //    @Override
-//    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-//
-//        //顶部应用栏+标签
-//        NavController navController = Navigation.findNavController(view);
-//        AppBarConfiguration appBarConfiguration =
-//                new AppBarConfiguration.Builder(R.id.navigation_home).build();
-//        Toolbar toolbar = view.findViewById(R.id.toolbar_home);
-//
-//        NavigationUI.setupWithNavController(
-//                toolbar,navController,appBarConfiguration
-//
-//        );
-//
-//
-//    }
+
 
     @Override
     public void onDestroyView() {

@@ -14,13 +14,14 @@ public class TeamupBoard {
     private String tbMasterAdd;
     private String tbTitle;
     private String tbDetail;
-    private String tbType;
+    private String[] tbType;
     private int perNum;
     private Bitmap tbMasterPicture;
 
-    public TeamupBoard(String tbId, String tbTitle, String tbDetail, Bitmap tbMasterPicture) {
+    public TeamupBoard(String tbId, String tbTitle, String tbDetail, String[] tbType, Bitmap tbMasterPicture) {
         this.tbTitle = tbTitle;
         this.tbDetail = tbDetail;
+        this.tbType = tbType;
         this.tbMasterPicture = tbMasterPicture;
     }
 
@@ -38,5 +39,9 @@ public class TeamupBoard {
 
     public Bitmap getTbMasterPicture() {
         return tbMasterPicture;
+    }
+
+    public String[] getTbType() {
+        return tbType;
     }
 }

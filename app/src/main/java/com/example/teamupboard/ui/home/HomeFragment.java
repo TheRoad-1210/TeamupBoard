@@ -2,6 +2,8 @@ package com.example.teamupboard.ui.home;
 
 import android.annotation.SuppressLint;
 import android.app.SearchManager;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -24,12 +26,19 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.teamupboard.R;
 import com.example.teamupboard.adapter.CardMasterAdapter;
+import com.example.teamupboard.model.TeamupBoard;
+import com.example.teamupboard.register.data.model.User;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.ArrayList;
 
 
 public class HomeFragment extends Fragment {
     private View view;
     private RecyclerView recyclerView;
     private CardMasterAdapter cardMasterAdapter;
+    private ArrayList<TeamupBoard> boards = new ArrayList<>();
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -52,9 +61,19 @@ public class HomeFragment extends Fragment {
     @SuppressLint("NotifyDataSetChanged")
     private void initRecyclerView(){
         recyclerView = view.findViewById(R.id.card_master_list);
-        String[] data = {"1","1","hao","2","o","o"};
 
-        cardMasterAdapter = new CardMasterAdapter(this.getActivity(),data);
+        for (int i = 0; i < 10; i++) {
+            TeamupBoard teamupBoard = new TeamupBoard(
+                    String.valueOf(i+10000),
+                    String.valueOf(i+10000),
+                    "甜食是人类最简单最初始的美食体验，蜂蜜的主要成分是果糖和葡萄糖，作为早期人类唯一的甜食，蜂蜜能快速产生热量，补充体力" +
+                            "这对我们的祖先至关重要，和人工提炼的蔗糖不同，蜂蜜中的糖，不经过水解，就可以直接被人体吸收。在中国的厨房，无论制作菜肴还是甜点，" +
+                            "蜂蜜都是其他糖类无法替代的。当然，白马甲最喜欢的是酥油蜂蜜。\n",
+                    BitmapFactory.decodeResource(getResources(),R.drawable.cat)
+            );
+            boards.add(teamupBoard);
+        }
+        cardMasterAdapter = new CardMasterAdapter(this.getActivity(),boards);
         recyclerView.setAdapter(cardMasterAdapter);
 
 

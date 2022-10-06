@@ -8,10 +8,16 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.widget.DrawableUtils;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.teamupboard.R;
+import com.example.teamupboard.model.TeamupBoard;
+import com.example.teamupboard.register.data.model.User;
+import com.example.teamupboard.util.RoundImageView;
+
+import java.util.ArrayList;
 
 /**
  * 主页卡片recyclerview的adapter
@@ -19,18 +25,23 @@ import com.example.teamupboard.R;
 public class CardMasterAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private Context context;
-    private String[] data;
+    private ArrayList<TeamupBoard> data;
 
 
     public class MasterViewHolder extends RecyclerView.ViewHolder{
 
         private final TextView textView;
         private final CardView cardView;
+        private final TextView title;
+        private final RoundImageView picture;
 
         public MasterViewHolder(@NonNull View itemView) {
             super(itemView);
             textView = itemView.findViewById(R.id.card_master_text);
             cardView = itemView.findViewById(R.id.card_master);
+            title = itemView.findViewById(R.id.card_master_title);
+            picture = itemView.findViewById(R.id.card_master_image);
+
             //设置点击事件
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -43,6 +54,18 @@ public class CardMasterAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
         public TextView getTextView() {
             return textView;
         }
+
+        public CardView getCardView() {
+            return cardView;
+        }
+
+        public TextView getTitle() {
+            return title;
+        }
+
+        public RoundImageView getPicture() {
+            return picture;
+        }
     }
 
     @NonNull
@@ -54,20 +77,22 @@ public class CardMasterAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
         return new MasterViewHolder(view);
     }
 
+    //绑定数据
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
-        ((MasterViewHolder) holder).getTextView().setText(data[position]);
-        System.out.println(data[position]);
+        ((MasterViewHolder) holder).getTextView().setText(data.get(position).getTbDetail());
+        ((MasterViewHolder) holder).getTitle().setText(data.get(position).getTbTitle());
+        ((MasterViewHolder) holder).getPicture().setImageBitmap(data.get(position).getTbMasterPicture());
     }
 
 
     @Override
     public int getItemCount() {
-        return data.length;
+        return data.size();
     }
 
 
-    public CardMasterAdapter(Context context, String[] data){
+    public CardMasterAdapter(Context context, ArrayList<TeamupBoard> data){
         //数据源、布局填充器
         this.data = data;
         this.context = context;

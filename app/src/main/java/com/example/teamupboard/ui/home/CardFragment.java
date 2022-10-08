@@ -15,23 +15,28 @@ import android.view.ViewGroup;
 import com.example.teamupboard.R;
 import com.example.teamupboard.adapter.CardMasterAdapter;
 import com.example.teamupboard.model.TeamupBoard;
+import com.example.teamupboard.model.TeamupBoardDAO;
 
 import java.util.ArrayList;
 
 public class CardFragment extends Fragment {
     private View view;
     private RecyclerView recyclerView;
+    private RecyclerView recyclerView2;
     private CardMasterAdapter cardMasterAdapter;
-    private ArrayList<TeamupBoard> boards = new ArrayList<>();
+    private ArrayList<TeamupBoard> boards;
+    private ArrayList<TeamupBoard> boards2;
+    private Boolean online;
 
-    public CardFragment() {
-        // Required empty public constructor
+
+    public CardFragment(Boolean online) {
+        this.online = online;
     }
 
-    public static CardFragment newInstance(String label){
+    public static CardFragment newInstance(String label, Boolean online){
         Bundle args = new Bundle();
         args.putString("label",label);
-        CardFragment cardFragment = new CardFragment();
+        CardFragment cardFragment = new CardFragment(online);
         cardFragment.setArguments(args);
         return cardFragment;
     }
@@ -56,27 +61,19 @@ public class CardFragment extends Fragment {
     @SuppressLint("NotifyDataSetChanged")
     private void initRecyclerView(){
         recyclerView = view.findViewById(R.id.card_master_list);
-        String[] strings = {"食物","美食","测试"};
+        recyclerView2 = view.findViewById(R.id.card_master_listpro);
 
-        for (int i = 0; i < 10; i++) {
-            TeamupBoard teamupBoard = new TeamupBoard(
-                    String.valueOf(i+10000),
-                    String.valueOf(i+10000),
-                    "甜食是人类最简单最初始的美食体验，蜂蜜的主要成分是果糖和葡萄糖，作为早期人类唯一的甜食，蜂蜜能快速产生热量，补充体力" +
-                            "这对我们的祖先至关重要，和人工提炼的蔗糖不同，蜂蜜中的糖，不经过水解，就可以直接被人体吸收。在中国的厨房，无论制作菜肴还是甜点，" +
-                            "蜂蜜都是其他糖类无法替代的。当然，白马甲最喜欢的是酥油蜂蜜。\n",
-                    strings,
-                    BitmapFactory.decodeResource(getResources(),R.drawable.cat)
-            );
-            boards.add(teamupBoard);
-        }
-        cardMasterAdapter = new CardMasterAdapter(this.getActivity(),boards);
-        recyclerView.setAdapter(cardMasterAdapter);
+        boards = new TeamupBoardDAO(this).getTeamupBoards(false,online);
+        recyclerView.setAdapter(new CardMasterAdapter(this.getActivity(),boards));
 
-        GridLayoutManager gridLayoutManager = new GridLayoutManager(this.getActivity(),2);
+        boards2 = new TeamupBoardDAO(this).getTeamupBoards(true,online);
+        recyclerView2.setAdapter(new CardMasterAdapter(this.getActivity(),boards2));
+
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(this.getActivity(),1);
         gridLayoutManager.setOrientation(GridLayoutManager.VERTICAL);
+        GridLayoutManager gridLayoutManager2 = new GridLayoutManager(this.getActivity(),1);
+        gridLayoutManager2.setOrientation(GridLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(gridLayoutManager);
-        cardMasterAdapter.notifyDataSetChanged();
-
+        recyclerView2.setLayoutManager(gridLayoutManager2);
     }
 }

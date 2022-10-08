@@ -1,4 +1,4 @@
-package com.example.teamupboard.register.data.model;
+package com.example.teamupboard.model;
 
 public class User {
     private String userId;

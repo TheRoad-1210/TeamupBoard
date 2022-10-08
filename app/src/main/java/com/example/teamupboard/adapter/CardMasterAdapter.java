@@ -8,14 +8,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.widget.DrawableUtils;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.teamupboard.R;
 import com.example.teamupboard.model.TeamupBoard;
-import com.example.teamupboard.register.data.model.User;
 import com.example.teamupboard.util.RoundImageView;
 
 import java.util.ArrayList;

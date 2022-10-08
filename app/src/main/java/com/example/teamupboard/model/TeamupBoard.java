@@ -6,7 +6,7 @@ import java.sql.Time;
 import java.sql.Timestamp;
 
 public class TeamupBoard {
-    private String tbId;
+    private int tbId;
     private String tbMasterId;
     private Timestamp createTime;
     private Timestamp deadline;
@@ -17,19 +17,22 @@ public class TeamupBoard {
     private String[] tbType;
     private int perNum;
     private Bitmap tbMasterPicture;
+    private Boolean online;
 
-    public TeamupBoard(String tbId, String tbTitle, String tbDetail, String[] tbType, Bitmap tbMasterPicture) {
+    public TeamupBoard(int tbId, String tbTitle, String tbDetail, String[] tbType, Bitmap tbMasterPicture, Boolean online) {
+        this.tbId = tbId;
         this.tbTitle = tbTitle;
         this.tbDetail = tbDetail;
         this.tbType = tbType;
         this.tbMasterPicture = tbMasterPicture;
+        this.online = online;
     }
 
     public String getTbTitle() {
         return tbTitle;
     }
 
-    public String getTbId() {
+    public int getTbId() {
         return tbId;
     }
 
@@ -43,5 +46,9 @@ public class TeamupBoard {
 
     public String[] getTbType() {
         return tbType;
+    }
+
+    public Boolean getOnline() {
+        return online;
     }
 }

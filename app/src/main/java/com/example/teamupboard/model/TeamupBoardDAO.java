@@ -87,54 +87,38 @@ public class TeamupBoardDAO {
         return teamupBoards;
     }
 
-    public ArrayList<TeamupBoard> getTeamupBoards(Boolean num){
+
+    public ArrayList<TeamupBoard> getTeamupBoards(Boolean online){
         ArrayList<TeamupBoard> list = new ArrayList<>();
-        if(num){
-            for (TeamupBoard teamupBoard: teamupBoards){
-                if(teamupBoard.getTbId() % 2 == 1){
-                    list.add(teamupBoard);
+        if(online) {
+            for (TeamupBoard teamupBoard : teamupBoards) {
+                if (teamupBoard.getOnline()) {
+
+                            list.add(teamupBoard);
+
                 }
             }
-        }else {
-            for (TeamupBoard teamupBoard: teamupBoards){
-                if(teamupBoard.getTbId() % 2 == 0){
+        }
+        else {
+            for (TeamupBoard teamupBoard : teamupBoards) {
+                if (!teamupBoard.getOnline()) {
+
                     list.add(teamupBoard);
+
                 }
             }
         }
         return list;
     }
 
-    public ArrayList<TeamupBoard> getTeamupBoards(Boolean num, Boolean online){
+    public ArrayList<TeamupBoard> getSearchData(String s){
         ArrayList<TeamupBoard> list = new ArrayList<>();
-        if(online) {
-            for (TeamupBoard teamupBoard : teamupBoards) {
-                if (teamupBoard.getOnline()) {
-                    if (num) {
-                        if (teamupBoard.getTbId() % 2 == 1) {
-                            list.add(teamupBoard);
-                        }
-                    } else {
-                        if (teamupBoard.getTbId() % 2 == 0) {
-                            list.add(teamupBoard);
-                        }
-                    }
-                }
-            }
-        }
-        else {
-            for (TeamupBoard teamupBoard: teamupBoards){
-                if(!teamupBoard.getOnline()){
-                    if(num){
-                        if(teamupBoard.getTbId() % 2 == 1){
-                            list.add(teamupBoard);
-                        }
-                    }
-                     else {
-                        if (teamupBoard.getTbId() % 2 == 0) {
-                            list.add(teamupBoard);
-                        }
-                    }
+
+        for (TeamupBoard teamupBoard:teamupBoards){
+            for (String type:teamupBoard.getTbType()){
+                if (type.equals(s)){
+                    list.add(teamupBoard);
+                    break;
                 }
             }
         }

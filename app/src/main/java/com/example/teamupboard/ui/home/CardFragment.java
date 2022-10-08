@@ -22,10 +22,8 @@ import java.util.ArrayList;
 public class CardFragment extends Fragment {
     private View view;
     private RecyclerView recyclerView;
-    private RecyclerView recyclerView2;
     private CardMasterAdapter cardMasterAdapter;
     private ArrayList<TeamupBoard> boards;
-    private ArrayList<TeamupBoard> boards2;
     private Boolean online;
 
 
@@ -61,19 +59,12 @@ public class CardFragment extends Fragment {
     @SuppressLint("NotifyDataSetChanged")
     private void initRecyclerView(){
         recyclerView = view.findViewById(R.id.card_master_list);
-        recyclerView2 = view.findViewById(R.id.card_master_listpro);
 
-        boards = new TeamupBoardDAO(this).getTeamupBoards(false,online);
+        boards = new TeamupBoardDAO(this).getTeamupBoards(online);
         recyclerView.setAdapter(new CardMasterAdapter(this.getActivity(),boards));
 
-        boards2 = new TeamupBoardDAO(this).getTeamupBoards(true,online);
-        recyclerView2.setAdapter(new CardMasterAdapter(this.getActivity(),boards2));
-
-        GridLayoutManager gridLayoutManager = new GridLayoutManager(this.getActivity(),1);
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(this.getActivity(),2);
         gridLayoutManager.setOrientation(GridLayoutManager.VERTICAL);
-        GridLayoutManager gridLayoutManager2 = new GridLayoutManager(this.getActivity(),1);
-        gridLayoutManager2.setOrientation(GridLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(gridLayoutManager);
-        recyclerView2.setLayoutManager(gridLayoutManager2);
     }
 }

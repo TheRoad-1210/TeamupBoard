@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -16,18 +17,16 @@ import com.example.teamupboard.databinding.FragmentPersonBinding;
 
 
 public class PersonFragment extends Fragment {
+    private View view;
 
     private FragmentPersonBinding binding;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-
-        binding = FragmentPersonBinding.inflate(inflater, container, false);
-        View root = binding.getRoot();
-
-        CardView cardView = root.findViewById(R.id.card_master);
-
-        return root;
+        view = inflater.inflate(R.layout.fragment_person,container,false);
+        WebView webView = view.findViewById(R.id.person_web);
+        webView.loadUrl("http://192.168.1.8:5173/Published");
+        return view;
     }
 
     @Override

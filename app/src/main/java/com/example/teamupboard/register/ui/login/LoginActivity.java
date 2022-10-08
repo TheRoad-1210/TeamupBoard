@@ -28,6 +28,7 @@ import com.example.teamupboard.R;
 import com.example.teamupboard.databinding.ActivityLoginBinding;
 
 public class LoginActivity extends AppCompatActivity {
+    private String baseUrl = "http://localhost:8081/user/login?userName=ssA&userPwd=123";
 
     private LoginViewModel loginViewModel;
     private ActivityLoginBinding binding;

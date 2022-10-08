@@ -29,6 +29,7 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.example.teamupboard.R;
 import com.example.teamupboard.adapter.CardMasterAdapter;
+import com.example.teamupboard.adapter.TabAdapter;
 import com.example.teamupboard.model.TeamupBoard;
 import com.example.teamupboard.register.data.model.User;
 import com.google.android.material.tabs.TabLayout;
@@ -61,61 +62,18 @@ public class HomeFragment extends Fragment {
 
     }
 
-//    /**
-//     * 对RecyclerView进行配置
-//     */
-//    @SuppressLint("NotifyDataSetChanged")
-//    private void initRecyclerView(){
-//        recyclerView = view.findViewById(R.id.card_master_list);
-//        String[] strings = {"食物","美食","测试"};
-//
-//        for (int i = 0; i < 10; i++) {
-//            TeamupBoard teamupBoard = new TeamupBoard(
-//                    String.valueOf(i+10000),
-//                    String.valueOf(i+10000),
-//                    "甜食是人类最简单最初始的美食体验，蜂蜜的主要成分是果糖和葡萄糖，作为早期人类唯一的甜食，蜂蜜能快速产生热量，补充体力" +
-//                            "这对我们的祖先至关重要，和人工提炼的蔗糖不同，蜂蜜中的糖，不经过水解，就可以直接被人体吸收。在中国的厨房，无论制作菜肴还是甜点，" +
-//                            "蜂蜜都是其他糖类无法替代的。当然，白马甲最喜欢的是酥油蜂蜜。\n",
-//                    strings,
-//                    BitmapFactory.decodeResource(getResources(),R.drawable.cat)
-//            );
-//            boards.add(teamupBoard);
-//        }
-//        cardMasterAdapter = new CardMasterAdapter(this.getActivity(),boards);
-//        recyclerView.setAdapter(cardMasterAdapter);
-//
-//        GridLayoutManager gridLayoutManager = new GridLayoutManager(this.getActivity(),2);
-//        gridLayoutManager.setOrientation(GridLayoutManager.VERTICAL);
-//        recyclerView.setLayoutManager(gridLayoutManager);
-//        cardMasterAdapter.notifyDataSetChanged();
-//
-//    }
 
     private void initTabLayout(){
-        List<CardFragment> cardFragmentList = new ArrayList<>();
         TabLayout tabLayout = view.findViewById(R.id.home_tab);
         ViewPager viewPager = view.findViewById(R.id.home_view);
-        tabLayout.addTab(tabLayout.newTab().setText("本地"));
-        cardFragmentList.add(CardFragment.newInstance("本地"));
-        tabLayout.addTab(tabLayout.newTab().setText(R.string.home_tabs_online));
-        cardFragmentList.add(CardFragment.newInstance("线上"));
-        FragmentPagerAdapter fragmentPagerAdapter = new FragmentPagerAdapter(getActivity().getSupportFragmentManager(),FragmentPagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
-            @NonNull
-            @Override
-            public Fragment getItem(int position) {
-                return cardFragmentList.get(position);
-            }
+        TabAdapter tabAdapter = new TabAdapter(getChildFragmentManager());
+        tabAdapter.addFragment(CardFragment.newInstance("本地"));
+        tabAdapter.addFragment(CardFragment.newInstance("线上"));
+        String[] strings = {"本地","线上"};
+        tabAdapter.setTitleArray(strings);
+        viewPager.setAdapter(tabAdapter);
 
-            @Override
-            public int getCount() {
-                return cardFragmentList.size();
-            }
-
-        };
-        viewPager.setAdapter(fragmentPagerAdapter);
-        fragmentPagerAdapter.notifyDataSetChanged();
-
-        tabLayout.setupWithViewPager(viewPager,false);
+        tabLayout.setupWithViewPager(viewPager);
     }
 
     @Override
